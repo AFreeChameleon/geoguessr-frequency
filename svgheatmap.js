@@ -1,3 +1,4 @@
+import SVGTest from './world.svg';
 const chartEl = document.getElementById('heatmap-chart');
 const labelEl = document.getElementById('frequency-label-map');
 const labelTextEl = document.getElementById('frequency-label-map-text');
@@ -31,7 +32,7 @@ function getFrequencyColour(percentFade, opacity) {
 }
 
 export default function(countriesWithFreq) {
-    fetch('/resources/world.svg')
+    fetch('/world.svg')
     .then((res) => res.text())
     .then((SVGHeatMapImage) => {
         window.addEventListener('scroll', (e) => {

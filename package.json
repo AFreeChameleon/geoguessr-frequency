@@ -15,6 +15,7 @@
     "chart.js": "^3.8.0",
     "gsap": "^3.10.4",
     "three": "^0.141.0",
-    "three-globe": "^2.24.5"
+    "three-globe": "^2.24.5",
+    "vite-plugin-plain-text": "^1.1.4"
   }
 }
