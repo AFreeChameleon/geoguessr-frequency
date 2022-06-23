@@ -14,6 +14,8 @@ import { Color } from 'three';
 import HeatmapChart from './svgheatmap';
 import ContinentFrequencyChart from './continentfrequencychart';
 
+const canvasEl = document.getElementById('app');
+
 let mouse = {
   x: 0,
   y: 0,
@@ -42,7 +44,8 @@ async function getCountryFrequencies() {
   return values.filter(v => v);
 }
 
-function addEventListeners({ innerHeight, innerWidth, renderer, Globe }) {
+function addEventListeners({ innerHeight, innerWidth, renderer, Globe, camera }) {
+
   renderer.domElement.addEventListener('mousemove', (event) => {
     const offset = renderer.domElement.getBoundingClientRect().top;
     mouse.x = (event.clientX / innerWidth) * 2 - 1;
@@ -149,7 +152,7 @@ const main = async () => {
   const raycaster = new THREE.Raycaster();
 
   // Setup camera
-  const camera = new THREE.PerspectiveCamera(
+  let camera = new THREE.PerspectiveCamera(
     75,
     renderer.domElement.offsetWidth / renderer.domElement.offsetHeight,
     0.1,
@@ -159,6 +162,20 @@ const main = async () => {
   camera.updateProjectionMatrix();
   camera.position.z = 250;
   camera.position.y = 25;
+
+  addEventListener('resize', () => {
+    console.log('resized')
+    renderer.setSize(canvasEl.offsetWidth, canvasEl.offsetHeight);
+    camera = new THREE.PerspectiveCamera(
+      75,
+      canvasEl.offsetWidth / canvasEl.offsetHeight,
+      0.1,
+      1000
+    );
+
+    camera.position.z = 250;
+    camera.position.y = 25;
+  })
 
   // Add camera controls
   // const tbControls = new OrbitControls(camera, renderer.domElement);
@@ -177,7 +194,7 @@ const main = async () => {
   scene.add(topLight);
 
 
-  addEventListeners({ innerHeight, innerWidth, renderer, Globe });
+  addEventListeners({ innerHeight, innerWidth, renderer, Globe, camera });
 
   const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(10, 50, 50),
@@ -212,10 +229,7 @@ const main = async () => {
   scene.add(stars);
 
 
-  Globe.onBeforeRender(() => {
-    console.log('after render')
-    // document.getElementById('loading-screen').style.display = 'none';
-  })
+
 
   // Kick-off renderer
   let parentPolygon;

@@ -1,7 +1,6 @@
 body {
   overflow-x: hidden;
-  font-family: Kanit, sans-serif;
-  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
 }
 
 #app {
@@ -170,6 +169,10 @@ path {
   color: #ffffff;
 }
 
-.source-link a {
+.source-name {
+  margin-bottom: 5px;
+}
+
+.source-link a, .code-source a {
   color: #fff;
 }
