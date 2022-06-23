@@ -9,8 +9,17 @@ import { defineConfig } from 'vite';
 import plainText from 'vite-plugin-plain-text';
 
 export default defineConfig({
-  plugins: [
-    // passing string type Regular expression
-    plainText(/world$/),
-  ],
+    plugins: [
+        // passing string type Regular expression
+        plainText(/world$/),
+    ],
+    build: {
+        rollupOptions: {
+            output: {
+                entryFileNames: `assets/[name].js`,
+                chunkFileNames: `assets/[name].js`,
+                assetFileNames: `assets/[name].[ext]`
+            }
+        }
+    }
 });

@@ -32,7 +32,7 @@ function getFrequencyColour(percentFade, opacity) {
 }
 
 export default function(countriesWithFreq) {
-    fetch('/world.svg')
+    fetch(process.env.NODE_ENV === 'development' ? '/world.svg' : '/assets/world.svg')
     .then((res) => res.text())
     .then((SVGHeatMapImage) => {
         window.addEventListener('scroll', (e) => {
