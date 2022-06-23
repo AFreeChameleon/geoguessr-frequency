@@ -1,5 +1,3 @@
-import * as d3 from 'd3';
-import { cloneDeep } from "lodash";
 const chartEl = document.getElementById('heatmap-chart');
 const labelEl = document.getElementById('frequency-label-map');
 const labelTextEl = document.getElementById('frequency-label-map-text');
