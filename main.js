@@ -112,9 +112,12 @@ const main = async () => {
     .polygonStrokeColor(() => '#111')
     .onGlobeReady(() => {
       setTimeout(() => {
-          Globe.polygonAltitude((c) => {
-          const highestFrequency = Math.max(...countriesWithFreq.map(c => c.frequency))
-          const selectedCountry = countriesWithFreq.find(cf => cf.name === c.properties.NAME);
+        const highestFrequency = Math.max(...countriesWithFreq.map(cf => cf.frequency));
+        Globe.polygonAltitude((c) => {
+          const selectedCountry = countriesWithFreq.find(cf => cf.name === c.properties.NAME_LONG || 
+            cf.name === c.properties.NAME || 
+            cf.altSpellings.includes(c.properties.NAME) || 
+            cf.altSpellings.includes(c.properties.NAME_LONG));
           if (selectedCountry && selectedCountry.frequency) {
             return (selectedCountry.frequency / highestFrequency) / 1.5;
           }
@@ -129,10 +132,6 @@ const main = async () => {
     x: 0,
     y: 0
   };
-
-  console.log(Globe.children)
-
-
 
   // Setup renderer
   const renderer = new THREE.WebGLRenderer({
@@ -164,7 +163,6 @@ const main = async () => {
   camera.position.y = 25;
 
   addEventListener('resize', () => {
-    console.log('resized')
     renderer.setSize(canvasEl.offsetWidth, canvasEl.offsetHeight);
     camera = new THREE.PerspectiveCamera(
       75,
@@ -273,7 +271,7 @@ const main = async () => {
         boundary.children[0].material[0].color.setHex(0xffffff);
         boundary.children[0].material[1].color.setHex(0xf205c3);
       }
-      // console.log('create label')
+
       // Create label
       labelDOM.style.display = 'block';
       labelDOM.style.top = (mouse.clientY + window.scrollY + 10) + 'px';
