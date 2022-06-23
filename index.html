@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <style>body { margin: 0 }</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <div class="label" id="frequency-label">
+      <div class="label-text" id="frequency-label-text">Label Text</div>
+      <div class="label-frequency">
+        <div>Frequency</div>
+        <div id="frequency">2</div>
+      </div>
+    </div>
+    <div class="label" id="frequency-label-map">
+      <div class="label-text" id="frequency-label-map-text">Label Text</div>
+      <div class="label-frequency">
+        <div>Frequency</div>
+        <div id="frequency-map">2</div>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-title">
+        Geoguessr countries by frequency
+      </div>
+    </div>
+    <div class="heatmap-container">
+      <div class="heatmap-inner">
+        <div class="continent-frequency-container">
+          <canvas id="continent-frequency" height="400" width="400"></canvas>
+        </div>
+        <div>
+          <div id="heatmap-chart"></div>
+          <div class="heatmap-scale-container">
+            <div class="heatmap-scale"></div>
+            <div class="heatmap-scale-text">
+              Frequency of countries
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="loading-screen" class="loading">
+      <div class="loading-inner">
+        <div class="loader"></div>
+        <div>
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="source">
+        <div class="source-name">Data by: Florin Simpson</div>
+        <div class="source-link">
+          <a href="https://docs.google.com/spreadsheets/d/1H7roKQ41xRzee_KPIuggPGS2XxrwczEFhm1zDPgyVDg/edit#gid=0" target="_blank">
+            Spreadsheet
+          </a>
+        </div>
+      </div>
+      <div class="code-source">
+        Code: <a href=""></a>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+    <script type="module" src="/heatmap.js"></script>
+    <script type="module" src="/svgheatmap.js"></script>
+    <script>
+      console.log('Source: https://docs.google.com/spreadsheets/d/1H7roKQ41xRzee_KPIuggPGS2XxrwczEFhm1zDPgyVDg/edit#gid=0')
+    </script>
+  </body>
+</html>
