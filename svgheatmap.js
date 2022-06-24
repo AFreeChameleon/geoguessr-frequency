@@ -26,7 +26,7 @@ function getFrequencyColour(percentFade, opacity) {
 
     diffRed = (diffRed * percentFade) + startColor.red;
     diffGreen = (diffGreen * percentFade) + startColor.green;
-    diffBlue = (diffBlue * percentFade) + startColor.blue;
+    diffBlue = (diffBlue * percentFade) + startColor.blue;  
 
     return `rgba(${diffRed}, ${diffGreen}, ${diffBlue}, ${opacity})`;
 }
@@ -37,7 +37,7 @@ export default function(countriesWithFreq) {
     .then((SVGHeatMapImage) => {
         window.addEventListener('scroll', (e) => {
             labelEl.style.display = 'none';
-        })
+        });
         chartEl.innerHTML = SVGHeatMapImage;
         const highestFrequency = Math.max(...countriesWithFreq.map(c => c.frequency));
         const mapImgEl = document.getElementById('world-map-image');
@@ -59,7 +59,7 @@ export default function(countriesWithFreq) {
             pathEl.addEventListener('mouseout', (e) => {
                 pathEl.setAttribute('style', `fill: rgb(72, 52, 226, 0.8);`);
                 labelEl.style.display = 'none';
-            })
+            });
         }
         for (let i = 0; i < countriesWithFreq.length; i++) {
             const cf = countriesWithFreq[i];

@@ -30,12 +30,14 @@ async function getCountryFrequencies() {
   const res = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${import.meta.env.VITE_GOOGLE_SPREADSHEET_KEY}/values/A%3AZ?key=${import.meta.env.VITE_GOOGLE_API_KEY}`);
   const values = res.data.values.map((v) => {
     const countryName = v[0];
+    const regionName = v[2];
     if (countryName) {
       const idx = countries.findIndex(c => c.name === countryName || c.altSpellings.indexOf(countryName) !== -1);
       if (idx !== -1) {
         return {
           ...countries[idx],
-          frequency: v[1] === "" ? 0 : Number(v[1])
+          frequency: v[1] === "" ? 0 : Number(v[1]),
+          regionName: regionName
         }
       }
     }
@@ -45,7 +47,6 @@ async function getCountryFrequencies() {
 }
 
 function addEventListeners({ innerHeight, innerWidth, renderer, Globe, camera }) {
-
   renderer.domElement.addEventListener('mousemove', (event) => {
     const offset = renderer.domElement.getBoundingClientRect().top;
     mouse.x = (event.clientX / innerWidth) * 2 - 1;

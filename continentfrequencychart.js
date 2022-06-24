@@ -5,23 +5,22 @@ ChartJS.Chart.register(...ChartJS.registerables)
 const chartEl = document.getElementById('continent-frequency').getContext('2d');
 
 const continents = {
-    'Africa': [],
-    'Asia': [],
-    'North America': [],
-    'South America': [],
-    'Oceania': [],
-    'Europe': []
+    'africa': [],
+    'asia': [],
+    'north america': [],
+    'south america': [],
+    'oceania': [],
+    'europe': []
 };
 
 export default function(countriesWithFreq) {
     let labels = Object.keys(continents);
     let data = [];
     for (const country of countriesWithFreq) {
-        if (country.region === 'Americas') {
-            continents['North America'].push(country.frequency);
-            continents['South America'].push(country.frequency);
+        if (country.regionName === 'eurasia') {
+            continents['europe'].push(country.frequency);
         } else {
-            continents[country.region].push(country.frequency);
+            continents[country.regionName].push(country.frequency);
         }
     }
 
@@ -33,7 +32,13 @@ export default function(countriesWithFreq) {
     const continentFrequencyChart = new ChartJS.Chart(chartEl, {
         type: 'pie',
         data: {
-            labels: labels,
+            labels: labels.map((l) => {
+                const words = l.split(' ');
+                for (let i = 0; i < words.length; i++) {
+                    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                }
+                return words.join(' ')
+            }),
             datasets: [{
                 data: data,
                 backgroundColor: [
